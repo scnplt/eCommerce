@@ -7,11 +7,11 @@ import { Product } from '../common/product';
 export class ProductService {
 
   private http = inject(HttpClient);
-  private baseUrl = "http://localhost:8080/api/products?size=100";
+  private baseUrl = "http://localhost:8080/api/products";
 
-  getProductsList(): Observable<Product[]> {
-    return this.http.get<GetResponse>(this.baseUrl)
-      .pipe(map(res => res._embedded.products));
+  getProductsList(categoryId: number): Observable<Product[]> {
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}&size=100`;
+    return this.http.get<GetResponse>(searchUrl).pipe(map(res => res._embedded.products));
   }
 
 }
