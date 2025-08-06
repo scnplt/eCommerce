@@ -1,0 +1,16 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="continer-fluid">
+      <div class="row">
+        @for (product of products; track $index) {
+          <div class="product-box col-md-3">
+            <img [src]="product.imageUrl" [alt]="product.name" class="img-responsive">
+            <h1>{{product.name}}</h1>
+            <div class="price">{{product.unitPrice | currency: 'USD'}}</div>
+            <a href="#" class="primary-btn">Add to cart</a>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
