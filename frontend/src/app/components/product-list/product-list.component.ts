@@ -6,8 +6,7 @@ import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-product-list',
   imports: [CurrencyPipe],
-  templateUrl: './product-list-grid.component.html',
-  styleUrl: './product-list.component.css'
+  templateUrl: './product-list-grid.component.html'
 })
 export class ProductListComponent implements OnInit {
 
