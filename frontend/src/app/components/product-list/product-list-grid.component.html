@@ -1,5 +1,9 @@
 <div class="main-content">
   <div class="section-content section-content-p30">
+
+    <h4>Category: {{currentCategoryName}}</h4>
+    <hr>
+
     <div class="continer-fluid">
       <div class="row">
         @for (product of products; track $index) {
@@ -12,5 +16,6 @@
         }
       </div>
     </div>
+    
   </div>
 </div>
