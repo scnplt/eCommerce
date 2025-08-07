@@ -7,7 +7,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-product-list',
   imports: [CurrencyPipe, RouterLink],
-  templateUrl: './product-list-grid.component.html'
+  templateUrl: './product-list-grid.component.html',
+  styleUrl: './product-list.component.css'
 })
 export class ProductListComponent implements OnInit {
 
