@@ -4,6 +4,8 @@ import { ProductService } from '../../services/product.service';
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { CartItem } from '../../common/cart-item';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,6 +17,7 @@ export class ProductListComponent implements OnInit {
 
   private route: ActivatedRoute = inject(ActivatedRoute);
   private productService: ProductService = inject(ProductService);
+  private cartService: CartService = inject(CartService);
 
   products: Product[] = [];
   private currentCategoryId: number = 1;
@@ -74,6 +77,11 @@ export class ProductListComponent implements OnInit {
   updatePageSize(newSize: string) {
     this.pageSize.set(+newSize);
     this.pageNumber = 1;
+  }
+
+  addToCart(product: Product) {
+    const cartItem = new CartItem(product);
+    this.cartService.addToCart(cartItem);
   }
 
   private processPaginateResult() {
