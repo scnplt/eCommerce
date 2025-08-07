@@ -13,6 +13,11 @@ export class ProductService {
   private productsUrl = `${BASE_URL}/products`;
   private categoryUrl = `${BASE_URL}/product-category`;
 
+  getProductsListPaginate(page: number, pageSize: number, categoryId: number): Observable<GetResponseProducts> {
+    const searchUrl = `${this.productsUrl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${pageSize}`;
+    return this.http.get<GetResponseProducts>(searchUrl);
+  }
+
   getProductsList(categoryId: number): Observable<Product[]> {
     const searchUrl = `${this.productsUrl}/search/findByCategoryId?id=${categoryId}`;
     return this.getProducts(searchUrl);
@@ -33,6 +38,11 @@ export class ProductService {
     return this.getProducts(searchUrl);
   }
 
+  searchProductsPaginate(page: number, pageSize: number, keyword: string): Observable<GetResponseProducts> {
+    const searchUrl = `${this.productsUrl}/search/findByNameContaining?name=${keyword}&page=${page}&size=${pageSize}`;
+    return this.http.get<GetResponseProducts>(searchUrl);
+  }
+
   private getProducts(searchUrl: string): Observable<Product[]> {
     return this.http.get<GetResponseProducts>(searchUrl)
       .pipe(map(res => res._embedded.products));
@@ -42,6 +52,12 @@ export class ProductService {
 interface GetResponseProducts {
   _embedded: {
     products: Product[];
+  },
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
+    number: number
   }
 }
 
