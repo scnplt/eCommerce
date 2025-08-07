@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProductCategory } from '../../common/product-category';
 import { ProductService } from '../../services/product.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -10,9 +10,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class ProductCategoryMenuComponent implements OnInit {
 
-  productCategories: ProductCategory[] = []
+  private productService: ProductService = inject(ProductService)
 
-  constructor(private productService: ProductService) { }
+  productCategories: ProductCategory[] = []
 
   ngOnInit() {
     this.productService.getProductCategories()

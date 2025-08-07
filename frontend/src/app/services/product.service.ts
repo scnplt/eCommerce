@@ -4,17 +4,18 @@ import { map, Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { ProductCategory } from '../common/product-category';
 
+const BASE_URL = "http://localhost:8080/api";
+
 @Injectable({ providedIn: 'root' })
 export class ProductService {
 
   private http = inject(HttpClient);
-  private baseUrl = "http://localhost:8080/api/products";
-  private categoryUrl = "http://localhost:8080/api/product-category";
+  private productsUrl = `${BASE_URL}/products`;
+  private categoryUrl = `${BASE_URL}/product-category`;
 
   getProductsList(categoryId: number): Observable<Product[]> {
-    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}&size=100`;
-    return this.http.get<GetResponseProducts>(searchUrl)
-      .pipe(map(res => res._embedded.products));
+    const searchUrl = `${this.productsUrl}/search/findByCategoryId?id=${categoryId}`;
+    return this.getProducts(searchUrl);
   }
 
   getProductCategories(): Observable<ProductCategory[]> {
@@ -22,6 +23,15 @@ export class ProductService {
       .pipe(map(res => res._embedded.productCategory));
   }
 
+  searchProducts(keyword: string): Observable<Product[]> {
+    const searchUrl = `${this.productsUrl}/search/findByNameContaining?name=${keyword}`;
+    return this.getProducts(searchUrl);
+  }
+
+  private getProducts(searchUrl: string): Observable<Product[]> {
+    return this.http.get<GetResponseProducts>(searchUrl)
+      .pipe(map(res => res._embedded.products));
+  }
 }
 
 interface GetResponseProducts {
