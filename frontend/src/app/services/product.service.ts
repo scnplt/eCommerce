@@ -18,6 +18,11 @@ export class ProductService {
     return this.getProducts(searchUrl);
   }
 
+  getProduct(productId: number): Observable<Product> {
+    const productUrl = `${this.productsUrl}/${productId}`;
+    return this.http.get<Product>(productUrl);
+  }
+
   getProductCategories(): Observable<ProductCategory[]> {
     return this.http.get<GetResponseProductCategory>(this.categoryUrl)
       .pipe(map(res => res._embedded.productCategory));
