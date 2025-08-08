@@ -30,7 +30,19 @@ export class CartService {
     this.computeCartTotals();
   }
 
-  private computeCartTotals() {
+  decrementQuantity(cartItem: CartItem) {
+    cartItem.quantity--;
+    cartItem.quantity === 0 ? this.remove(cartItem) : this.computeCartTotals();
+  }
+
+  remove(cartItem: CartItem) {
+    const itemIndex = this.cartItems.findIndex((ci) => ci.id === cartItem.id);
+    if (itemIndex < 0) return;
+    this.cartItems.splice(itemIndex, 1);
+    this.computeCartTotals();
+  }
+
+  computeCartTotals() {
     let totalPrice: number = 0;
     let totalQuantity: number = 0;
 
