@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ShopFormService } from '../../services/shop-form.service';
+import { Country } from '../../common/country';
 
 @Component({
   selector: 'app-checkout',
@@ -15,6 +16,8 @@ import { ShopFormService } from '../../services/shop-form.service';
 export class CheckoutComponent implements OnInit {
   private formBuilder: FormBuilder = inject(FormBuilder);
   private shopFormService: ShopFormService = inject(ShopFormService);
+
+  countries: Country[] = [];
 
   totalPrice: number = 0;
   totalQuantity: number = 0;
@@ -61,6 +64,10 @@ export class CheckoutComponent implements OnInit {
     this.shopFormService
       .getCreditCardYears()
       .subscribe((data) => (this.creditCardYears = data));
+
+    this.shopFormService
+      .getCountries()
+      .subscribe((data) => this.countries = data);
   }
 
   copyShippingAddressToBillingAddress(event: any) {
