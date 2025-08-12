@@ -10,15 +10,18 @@ import {
 import { ShopFormService } from '../../services/shop-form.service';
 import { State } from '../../common/state';
 import { ShopValidators } from '../../validators/shop-validators';
+import { CartService } from '../../services/cart.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CurrencyPipe],
   templateUrl: './checkout.component.html',
 })
 export class CheckoutComponent implements OnInit {
   private formBuilder: FormBuilder = inject(FormBuilder);
   private shopFormService: ShopFormService = inject(ShopFormService);
+  private cartService: CartService = inject(CartService);
 
   countries: Country[] = [];
 
@@ -73,6 +76,8 @@ export class CheckoutComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.reviewCartDetails();
+
     const startMonth: number = new Date().getMonth() + 1;
 
     this.shopFormService
@@ -108,6 +113,11 @@ export class CheckoutComponent implements OnInit {
   get creditCardNameOnCard() { return this.checkoutFormGroup.get('creditCard.nameOnCard'); }
   get creditCardNumber() { return this.checkoutFormGroup.get('creditCard.cardNumber'); }
   get creditCardSecurityCode() { return this.checkoutFormGroup.get('creditCard.securityCode'); }
+
+  reviewCartDetails() {
+    this.cartService.totalPrice.subscribe(data => this.totalPrice = data);
+    this.cartService.totalQuantity.subscribe(data => this.totalQuantity = data);
+  }
 
   copyShippingAddressToBillingAddress(event: any) {
     if (!event.target.checked) {
