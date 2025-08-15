@@ -531,49 +531,7 @@ input.au-input.au-input-xl {
   background: #fff;
 }
 .main-content.page-m {
-  padding: 10% 15% !important;
-}
-
-/*
- * ----------------------------
- * Products List
- * ----------------------------
- */
-
-.product-box img {
-  width: 150px;
-}
-
-.items select {
-  width: 100px;
-  height: 40px;
-  border-radius: 40px;
-  padding-left: 15px;
-  margin-bottom: 10px;
-  outline: 0;
-  margin-left: 5px;
-}
-.product-box {
-  margin-bottom: 60px;
-}
-.price {
-  margin: 15px 0 0;
-  font-weight: 800;
-  color: #0da8e4;
-}
-.product-box h1 {
-  font-size: 18px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
-  font-weight: 600;
-  padding-top: 12px;
-  margin-bottom: 7px;
-}
-.product-box h2 {
-  font-size: 15px;
-  padding-bottom: 0;
-  font-weight: 500;
-  color: #585858;
+  padding: 10% 30% 10% 5%;
 }
 
 /*
@@ -726,20 +684,6 @@ table.table.table-bordered th {
   margin-left: 5px;
 }
 
-/*
- * ----------------------------
- * Product Details
- * ----------------------------
- */
-
-.price {
-  margin: 15px 0 0;
-  font-weight: 800;
-  color: #0da8e4;
-}
-.detail-section {
-  margin-top: 60px;
-}
 /**/
 
 /*
@@ -988,9 +932,6 @@ footer ul li {
   }
   .footer-pagination {
     text-align: center;
-  }
-  .product-box {
-    text-align: centerg;
   }
   .page-container {
     position: relative;
